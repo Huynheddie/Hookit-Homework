@@ -2,12 +2,31 @@
 
 html {
   font-family: "Roboto";
+  background-color: #f1f3f5;
+}
+
+table {
+  border-collapse: collapse;
 }
 
 table, th, td {
   margin: 0 auto;
   width: 70%;
+  text-align: center;
   border: 1px solid black;
+}
+
+th {
+  background-color: #8cc439;
+  padding: 5px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #d9ffa0;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ffffff;
 }
 
 .search-filter {
@@ -21,6 +40,7 @@ table, th, td {
 nav li {
   display: inline;
   float: left;
+  border-right: 1px solid #bbb;
 }
 
 nav ul {
@@ -29,6 +49,7 @@ nav ul {
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  font-size: 20px;
 }
 
 nav li a {
@@ -39,7 +60,6 @@ nav li a {
   text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
-nav li a:hover {
-  background-color: #111;
+.active {
+  background-color: #4CAF50;
 }

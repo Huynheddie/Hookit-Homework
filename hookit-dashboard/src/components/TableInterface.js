@@ -52,14 +52,14 @@ const TableInterface = ({ postMemo, onDisplayPosts, setOnDisplayPosts }) => {
     }
       
     return (
-        <div>
-            <div style={{textAlign: "center"}}>
-                <h1>Hookit User Dashboard</h1>
+        <div style={{marginBottom: "20px"}}>
+            <h1 style={{textAlign: "center"}}>Hookit User Dashboard</h1>
+            <div style={{marginLeft: "15%"}}>
+                <h2 style={{marginBottom: "10px"}}>Posts</h2>
                 <input className={"search-filter"} placeholder="Search by name" value={searchFilter} onChange={handleSearchFilterChange}></input>
                 <SortOption sortField={sortField} handleSortField={handleSortField}
                             sortOrder={sortOrder} handleSortOrder={handleSortOrder} />
             </div>
-            
             <Table onDisplayPosts={onDisplayPosts} />
         </div>
     );
