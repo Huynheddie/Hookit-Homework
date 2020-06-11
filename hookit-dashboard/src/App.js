@@ -1,44 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Table from './components/Table'
+import TableInterface from './components/TableInterface';
+import ChartInterface from './components/ChartInterface'
+import Navbar from './components/Navbar'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './css/App.css';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [postValues, setPostValues] = useState([]);
   // Non-changing list of merged posts
-  const [mergedPosts, setMergedPosts] = useState([]);
+  const [postMemo, setPostMemo] = useState([]);
+  // const [mergedPosts, setMergedPosts] = useState([]);
+
   // List of posts displayed on table - will be modified often by filters
   const [onDisplayPosts, setOnDisplayPosts] = useState([]);
-
-  const [searchFilter, setSearchFilter] = useState('');
-  const [sortField, setSortField] = useState('');
 
   // Retrieves data when page is rendered
   useEffect(() => {
     contactAPI('Posts', setPosts);
     contactAPI('PostValues', setPostValues);
   }, [])
-
-  // Once both datasets are retrieved, merge into one array of entries by ID
-  useEffect(() => {
-    if (posts.length && postValues.length) {
-      // console.log('Posts:', posts);
-      // console.log('PostValues:', postValues);
-
-      // Merge data from child (PostValues) into parent (Posts) object 
-      let merged = postValues.map(postValue => 
-        Object.assign(postValue, posts.find(post => post.SocialPost_ID === postValue.SocialPost_ID)));
-
-      setMergedPosts(merged);
-      setOnDisplayPosts(merged);
-    }
-  }, [posts, postValues])
-
-  // Debug: view merged list when it's completed
-  useEffect(() => {
-    console.log('Merged:', mergedPosts);
-  }, [mergedPosts])
 
   // Retrieve data from remote endpoint and update local data
   const contactAPI = (endpoint, setFunc) => {
@@ -51,21 +33,38 @@ const App = () => {
     });
   }
 
-  // Update search term filter and filter posts 
-  const handleSearchFilterChange = (event) => {
-    let searchTerm = event.target.value.toLowerCase();
-    setSearchFilter(searchTerm);
-    setOnDisplayPosts(mergedPosts
-      .filter((post) => post.Displayname.toLowerCase().includes(searchTerm))
-    )
-  }
+  // Once both datasets are retrieved, merge into one array of entries by ID
+  useEffect(() => {
+    if (posts.length && postValues.length) {
+
+      // Add 'Interactions' attribute to posts
+      let modifiedPosts = posts.map(post => Object.assign(post, { Interactions: post.Likes + post.Comments + post.Views }));
+
+      // Merge data from child (PostValues) into parent (Posts) object 
+      // let merged = postValues.map(postValue => 
+      //   Object.assign(postValue, modifiedPosts.find(post => post.SocialPost_ID === postValue.SocialPost_ID)));
+      
+      setPostMemo(modifiedPosts);
+      setOnDisplayPosts(modifiedPosts);
+    }
+  }, [posts, postValues])
 
   return (
     <div>
-      <h1>Hookit User Dashboard</h1>
-      <p>Sorting by: {sortField}</p>
-      <input value={searchFilter} onChange={handleSearchFilterChange}></input>
-      <Table posts={onDisplayPosts} setSortField={setSortField} />
+      <Router>
+
+          <Navbar />
+
+          <Switch>
+            <Route path="/charts">
+              <ChartInterface posts={posts} postValues={postValues} />
+            </Route>
+            <Route path="/">
+              <TableInterface postMemo={postMemo} onDisplayPosts={onDisplayPosts} setOnDisplayPosts={setOnDisplayPosts} />
+            </Route>
+          </Switch>
+          
+      </Router>
     </div>
   )
 }

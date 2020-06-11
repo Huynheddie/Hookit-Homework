@@ -1,16 +1,16 @@
 import React from 'react'
+import tableValues from '../utils/config'
 
-const TableHeader = ({ setSortField }) => {
+const TableHeader = (props) => {
     return (
         <tr>
-            <th onClick={() => setSortField('BrandName')}>Brand Name</th>
-            <th onClick={() => setSortField('Displayname')}>Display Name</th>
-            <th onClick={() => setSortField('Likes')}>Likes</th>
-            <th onClick={() => setSortField('Comments')}>Comments</th>
-            <th onClick={() => setSortField('Views')}>Views</th>
-            <th onClick={() => setSortField('TagValue')}>Tag Value</th>
-            <th onClick={() => setSortField('MentionValue')}>Mention Value</th>
-            <th onClick={() => setSortField('SocialPost_ID')}>ID (?)</th>
+            {
+                tableValues.map((element, index) => (
+                            <th key={index}>
+                                {element.displayName}
+                            </th>
+                        ))  
+            }
         </tr>
     )
 }

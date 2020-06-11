@@ -2,13 +2,13 @@ import React from 'react'
 import TableHeader from './TableHeader'
 import BrandInfo from './BrandInfo'
 
-const Table = ({ posts, setSortField }) => {
+const Table = ({ onDisplayPosts }) => {
     return (
         <table>
             <tbody>
-                <TableHeader setSortField={setSortField} />
-                {
-                    posts.map((post, i) => (
+                <TableHeader />
+                { /* Table Body */
+                    onDisplayPosts.map((post, i) => (
                         <tr key={i}>
                             <BrandInfo post={post}/>
                         </tr>
@@ -17,7 +17,7 @@ const Table = ({ posts, setSortField }) => {
 
             </tbody>
         </table>
-    )
+    );
 }
 
 export default Table;
