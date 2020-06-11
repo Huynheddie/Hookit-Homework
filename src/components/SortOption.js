@@ -1,4 +1,5 @@
 import React from 'react'
+import tableValues from '../utils/config'
 
 const SortOption = ({ sortField, handleSortField, sortOrder, handleSortOrder }) => {
     return (
@@ -6,11 +7,13 @@ const SortOption = ({ sortField, handleSortField, sortOrder, handleSortOrder }) 
             <label htmlFor="sortField">Sort by: </label>
             <select name="sortField" value={sortField} onChange={handleSortField}>
                 <option disabled defaultValue></option>
-                <option value={"Displayname"}>Display name</option>
-                <option value={"Likes"}>Likes</option>
-                <option value={"Comments"}>Comments</option>
-                <option value={"Views"}>Views</option>
-                <option value={"Interactions"}>Interactions</option>
+                {
+                    tableValues.map((element, index) => (
+                        <option key={index} value={element.identifier}>
+                            {element.displayName}
+                        </option>
+                    ))
+                }
             </select>
 
             <label style={{marginLeft: "5px"}} htmlFor="sortOrder">Direction: </label>

@@ -9,9 +9,9 @@ import './css/App.css';
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [postValues, setPostValues] = useState([]);
+  
   // Non-changing list of merged posts
   const [postMemo, setPostMemo] = useState([]);
-  // const [mergedPosts, setMergedPosts] = useState([]);
 
   // List of posts displayed on table - will be modified often by filters
   const [onDisplayPosts, setOnDisplayPosts] = useState([]);
@@ -39,10 +39,6 @@ const App = () => {
 
       // Add 'Interactions' attribute to posts
       let modifiedPosts = posts.map(post => Object.assign(post, { Interactions: post.Likes + post.Comments + post.Views }));
-
-      // Merge data from child (PostValues) into parent (Posts) object 
-      // let merged = postValues.map(postValue => 
-      //   Object.assign(postValue, modifiedPosts.find(post => post.SocialPost_ID === postValue.SocialPost_ID)));
       
       setPostMemo(modifiedPosts);
       setOnDisplayPosts(modifiedPosts);
