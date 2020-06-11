@@ -16,7 +16,7 @@ const SortOption = ({ sortField, handleSortField, sortOrder, handleSortOrder }) 
                 }
             </select>
 
-            <label style={{marginLeft: "5px"}} htmlFor="sortOrder">Direction: </label>
+            <label style={{marginLeft: "5px"}} htmlFor="sortOrder">Order: </label>
             <select name="sortOrder" value={sortOrder} onChange={handleSortOrder}>
                 <option value={"asc"}>ASC</option>
                 <option value={"desc"}>DESC</option>

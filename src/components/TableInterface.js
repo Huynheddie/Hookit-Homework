@@ -56,7 +56,7 @@ const TableInterface = ({ postMemo, onDisplayPosts, setOnDisplayPosts }) => {
             <h1 style={{textAlign: "center"}}>Hookit User Dashboard</h1>
             <div style={{marginLeft: "15%"}}>
                 <h2 style={{marginBottom: "10px"}}>Posts</h2>
-                <input className={"search-filter"} placeholder="Search by name" value={searchFilter} onChange={handleSearchFilterChange}></input>
+                <input className={"search-filter"} placeholder="Filter by name" value={searchFilter} onChange={handleSearchFilterChange}></input>
                 <SortOption sortField={sortField} handleSortField={handleSortField}
                             sortOrder={sortOrder} handleSortOrder={handleSortOrder} />
             </div>
