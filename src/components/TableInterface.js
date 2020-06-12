@@ -39,6 +39,8 @@ const TableInterface = ({ postMemo, onDisplayPosts, setOnDisplayPosts }) => {
         setOnDisplayPosts(postMemo
         .filter((post) => post.Displayname.toLowerCase().includes(searchTerm))
         )
+        setSortField('');
+        setSortOrder('asc');
     }
 
     const handleSortField = (event) => {

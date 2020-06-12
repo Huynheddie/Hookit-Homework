@@ -8,9 +8,10 @@ const ChartInterface = ({ posts, postValues }) => {
 
     // Second Chart
     let combinedPosts = posts.reduce((acc, curr) => {
+        // Group Post objects by display name and add 'AverageInteractions' attribute
         const found = acc.find(a => a.Displayname === curr.Displayname);
         const interactions = curr.Likes + curr.Comments + curr.Views;
-
+        
         if (!found) {
             acc.push({
               Displayname: curr.Displayname, 
@@ -29,12 +30,12 @@ const ChartInterface = ({ posts, postValues }) => {
 
     // Third Chart
     let combinedPostValues = postValues.reduce((acc, curr) => {
+        // Group PostValue objects by Brand Name and add 'AverageMentionValue' attribute
         const found = acc.find(a => a.BrandName === curr.BrandName);
         
         if (!found) {
             acc.push({
                 BrandName: curr.BrandName,
-                // TagValue: curr.TagValue,
                 MentionValue: curr.MentionValue,
                 PostCount: 1,
                 AverageMentionValue: +curr.MentionValue.toFixed(2)
